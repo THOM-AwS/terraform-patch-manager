@@ -30,7 +30,7 @@ variable "schedule_windows" {
 variable "schedule_windows_scan" {
   description = "when will scanner window be run on cron expression"
   type        = string
-  default     = "cron(0 16 ? * * *)"  // Daily at 2am AEST
+  default     = "cron(0 16 ? * SUN *)"  // Daily at 2am AEST
 }
 
 variable "install_maintenance_windows_targets" {
