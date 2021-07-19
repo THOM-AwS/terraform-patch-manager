@@ -44,6 +44,36 @@ variable "install_maintenance_windows_targets" {
   default = []
 }
 
+variable "approved_patches_compliance_level" {
+  description = "The list of systems for the SSM baseline"
+  type        = string
+  default     = "CRITICAL"
+}
+
+variable "approved_patches" {
+  description = "The list of approved patches for the SSM baseline"
+  type        = list(string)
+  default     = []
+}
+
+variable "rejected_patches" {
+  description = "The list of rejected patches for the SSM baseline"
+  type        = list(string)
+  default     = []
+}
+
+variable "custom_baselines" {
+  description = "create a list of custom baselines you want to use instead of the default ones."
+  type        = list(string)
+  default     = []
+}
+
+variable "operating_system" {
+  description = "which OS do you want to create a patch baseline for"
+  type        = list(string)
+  default     = "WINDOWS"
+}
+
 variable "reboot_option" {
   description = "When you choose the RebootIfNeeded option, the instance is rebooted if Patch Manager installed new patches, or if it detected any patches with a status of INSTALLED_PENDING_REBOOT during the Install operation. Possible values : RebootIfNeeded, NoReboot"
   type        = string
