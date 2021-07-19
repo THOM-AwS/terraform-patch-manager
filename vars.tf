@@ -71,7 +71,7 @@ variable "custom_baselines" {
 variable "operating_system" {
   description = "which OS do you want to create a patch baseline for"
   type        = list(string)
-  default     = ""
+  default     = ["WINDOWS"]
 }
 
 variable "reboot_option" {
