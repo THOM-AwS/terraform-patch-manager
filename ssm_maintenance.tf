@@ -8,7 +8,7 @@ resource "aws_ssm_maintenance_window" "window-scan" {
 }
 
 resource "aws_ssm_maintenance_window" "window" {
-  count    = (terraform.workspace["enabled"] ? 1 : 0) * length(var.maintenance_windows)
+  count    = (var.enabled ? 1 : 0) * length(var.maintenance_windows)
   name     = "CMD-Maintenance-Window-${var.maintenance_windows[count.index]}"
   schedule =  var.schedule_windows[count.index]
   duration = 3
@@ -16,7 +16,7 @@ resource "aws_ssm_maintenance_window" "window" {
 }
 
 resource "aws_ssm_maintenance_window_task" "task_install_patches" {
-  count            = (terraform.workspace["enabled"] ? 1 : 0) * length(var.maintenance_windows)
+  count            = (var.enabled ? 1 : 0) * length(var.maintenance_windows)
   name             = "CMD-Maintenance-Window-Patch-${var.maintenance_windows[count.index]}"
   window_id        = aws_ssm_maintenance_window.window[count.index].id
   task_type        = "RUN_COMMAND"
@@ -71,7 +71,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
 
 ######## Group A ##########
 resource "aws_ssm_maintenance_window_target" "target_install_a" {
-  count         = terraform.workspace["enabled"] ? 1 : 0
+  count         = var.enabled ? 1 : 0
   name          = "AZ-A"
   window_id     = aws_ssm_maintenance_window.window[count.index].id
   resource_type = "INSTANCE"
@@ -97,7 +97,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_a" {
 ######## Group B ##########
 
 resource "aws_ssm_maintenance_window_target" "target_install_b" {
-  count         = terraform.workspace["enabled"] ? 1 : 0
+  count         = var.enabled ? 1 : 0
   name             = "AZ-B"
   window_id     = aws_ssm_maintenance_window.window[1].id
   resource_type = "INSTANCE"

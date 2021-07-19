@@ -1,3 +1,9 @@
+variable "enabled" {
+  description = "is the module enabled and will it create resources?"
+  type        = bool
+  default     = true
+}
+
 variable "maintenance_windows" {
   description = "not used yet. want to set to be dynamic creation of patch groups by count and name."
   type = list(string)
