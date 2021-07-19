@@ -122,7 +122,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_b" {
 ######## Group C ##########
 
 resource "aws_ssm_maintenance_window_target" "target_install_c" {
-  count         = terraform.workspace["enabled"] ? 1 : 0
+  count         = var.enabled ? 1 : 0
   name             = "AZ-C"
   window_id     = aws_ssm_maintenance_window.window[2].id
   resource_type = "INSTANCE"
