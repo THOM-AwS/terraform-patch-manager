@@ -5,13 +5,13 @@ variable "enabled" {
 }
 
 variable "maintenance_windows" {
-  description = "not used yet. want to set to be dynamic creation of patch groups by count and name."
+  description = "To set to be dynamic creation of patch groups by count and name."
   type = list(string)
   default = [ "AZ-A", "AZ-B", "AZ-C" ]
 }
 
 variable "default_patch_groups" {
-  description = "this allows you to use the aws default patch groups without creating new ones if you dont need to customise settings of a group."
+  description = "this allows you to use the aws default patch groups without creating new ones if you dont need to customise settings of a group. Set to false to create your own list of baselines"
   type = bool
   default = true
 }
@@ -27,6 +27,7 @@ variable "schedule_windows" {
   type        = list(string)
   default     = ["cron(0 18 ? * TUE *)", "cron(0 18 ? * WED *)", "cron(0 18 ? * THU *)"] // 4am AEST
 }
+
 variable "schedule_windows_scan" {
   description = "when will scanner window be run on cron expression"
   type        = string
@@ -42,6 +43,43 @@ variable "install_maintenance_windows_targets" {
     )
   )
   default = []
+}
+
+
+variable "patch_baseline_approval_rules" {
+  description = "A set of rules used to include patches in the baseline. Up to 10 approval rules can be specified. Each `approval_rule` block requires the fields documented below."
+  type = list(object({
+    approve_after_days : number
+    compliance_level : string
+    enable_non_security : bool
+    patch_baseline_filters : list(object({
+      name : string
+      values : list(string)
+    }))
+  }))
+
+  default = [
+    {
+      approve_after_days  = 7
+      compliance_level    = "HIGH"
+      enable_non_security = true
+      patch_baseline_filters = [
+        {
+          name   = "PRODUCT"
+          values = ["AmazonLinux2", "AmazonLinux2.0"]
+        },
+        {
+          name   = "CLASSIFICATION"
+          values = ["Security", "Bugfix", "Recommended"]
+        },
+        {
+          name   = "SEVERITY"
+          values = ["Critical", "Important", "Medium"]
+        }
+      ]
+    }
+  ]
+
 }
 
 variable "approved_patches_compliance_level" {
