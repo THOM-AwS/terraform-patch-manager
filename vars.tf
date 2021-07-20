@@ -154,7 +154,7 @@ variable "max_errors" {
 variable "service_role_arn" {
   description = "The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you"
   type        = string
-  default     = null
+  default     = "arn:aws:iam::aws:policy/service-role/AmazonSSMMaintenanceWindowRole"
 }
 
 variable "client_name" {
