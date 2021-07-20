@@ -2,7 +2,7 @@
 # # Patch Baselines
 resource "aws_ssm_patch_baseline" "baselinecustom" {
   count            = (var.default_patch_groups ? 0 : 1) * length(var.custom_baselines)
-  name             = "${module.this.id}-${var.operating_system}"
+  name             = "Patch-Manager-Custom-${var.operating_system}"
   description      = "${var.operating_system} baseline"
   operating_system = var.operating_system
 

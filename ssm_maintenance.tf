@@ -6,7 +6,7 @@ resource "aws_ssm_maintenance_window" "window-scan" {
   duration = 3
   cutoff   = 1
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 }
 
@@ -17,7 +17,7 @@ resource "aws_ssm_maintenance_window" "window" {
   duration = 3
   cutoff   = 1
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 }
 
@@ -31,7 +31,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
   max_concurrency  = var.max_concurrency
   max_errors       = var.max_errors
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 
   targets {
@@ -61,7 +61,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
   window_id     = aws_ssm_maintenance_window.window-scan[0].id
   resource_type = "INSTANCE"
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 
   dynamic "targets" {
@@ -88,7 +88,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_a" {
   window_id     = aws_ssm_maintenance_window.window[count.index].id
   resource_type = "INSTANCE"
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 
   dynamic "targets" {
@@ -117,7 +117,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_b" {
   window_id     = aws_ssm_maintenance_window.window[1].id
   resource_type = "INSTANCE"
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 
   dynamic "targets" {
@@ -145,7 +145,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_c" {
   window_id     = aws_ssm_maintenance_window.window[2].id
   resource_type = "INSTANCE"
   tags     = {
-    Managed_by = Terraform
+    Managed_by = "Terraform"
   }
 
   dynamic "targets" {
