@@ -14,3 +14,6 @@ You cannot use more than one Key here, so all machines should have the Patch Gro
 
 Vars file overrides are available for not using the default patch baselines, testing in progress soon for overriding the defaults 
 for specific supplied baselines. those will be compatible with the patch groups, or you can also override the tags. 
+
+Patches should be applied to all EC2 machines with "Patch Group" as the key. machines that are pets should all get the value
+of the AZ that they reside in. "AZ-A". if the machine should not be patched (its an ASG), then it should get the "SCAN" tag value.
