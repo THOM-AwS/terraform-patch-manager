@@ -142,7 +142,6 @@ variable "service_role_arn" {
 }
 
 variable "client_name" {
-  description = "customer name that is being deployed to"
+  description = "customer name that is being deployed to. This is required."
   type        = string
-  default     = ""
 }

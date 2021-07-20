@@ -70,10 +70,10 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
   }
 }
 
-######## Group A ##########
-resource "aws_ssm_maintenance_window_target" "target_install_a" {
-  count         = var.enabled ? 1 : 0
-  name          = "AZ-A"
+######## Group ##########
+resource "aws_ssm_maintenance_window_target" "target_install" {
+  count         = length(var.maintenance_windows)
+  name          = var.maintenance_windows[count.index]
   window_id     = aws_ssm_maintenance_window.window[count.index].id
   resource_type = "INSTANCE"
 
@@ -89,58 +89,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_a" {
     for_each = length(var.install_maintenance_windows_targets) == 0 ? [1] : []
     content {
       key    = "tag:Patch Group"
-      values = ["AZ-A"] //var.install_patch_groups
-    }
-  }
-}
-
-
-######## Group B ##########
-
-resource "aws_ssm_maintenance_window_target" "target_install_b" {
-  count         = var.enabled ? 1 : 0
-  name             = "AZ-B"
-  window_id     = aws_ssm_maintenance_window.window[1].id
-  resource_type = "INSTANCE"
-
-  dynamic "targets" {
-    for_each = toset(var.install_maintenance_windows_targets)
-    content {
-      key    = targets.value.key
-      values = targets.value.values
-    }
-  }
-
-  dynamic "targets" {
-    for_each = length(var.install_maintenance_windows_targets) == 0 ? [1] : []
-    content {
-      key    = "tag:Patch Group"
-      values = ["AZ-B"] //var.install_patch_groups
-    }
-  }
-}
-
-######## Group C ##########
-
-resource "aws_ssm_maintenance_window_target" "target_install_c" {
-  count         = var.enabled ? 1 : 0
-  name             = "AZ-C"
-  window_id     = aws_ssm_maintenance_window.window[2].id
-  resource_type = "INSTANCE"
-
-  dynamic "targets" {
-    for_each = toset(var.install_maintenance_windows_targets)
-    content {
-      key    = targets.value.key
-      values = targets.value.values
-    }
-  }
-
-  dynamic "targets" {
-    for_each = length(var.install_maintenance_windows_targets) == 0 ? [1] : []
-    content {
-      key    = "tag:Patch Group"
-      values = ["AZ-C"] //var.install_patch_groups
+      values = var.maintenance_windows[count.index]
     }
   }
 }
