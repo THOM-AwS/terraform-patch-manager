@@ -1,8 +1,4 @@
-
-########## SCAN ##########
-resource "aws_ssm_patch_group" "patchgroup-scan-default" {
-  count = 0//length(var.default_baselines)
-  baseline_id = element([
+baseline_list = [
     data.aws_ssm_patch_baseline.windows.id,
     data.aws_ssm_patch_baseline.suse.id,
     data.aws_ssm_patch_baseline.ubuntu.id,
@@ -12,9 +8,15 @@ resource "aws_ssm_patch_group" "patchgroup-scan-default" {
     data.aws_ssm_patch_baseline.amazon2.id,
     data.aws_ssm_patch_baseline.centos.id,
     data.aws_ssm_patch_baseline.oracle.id
-  ], count.index)
+  ]
+########## SCAN ##########
+resource "aws_ssm_patch_group" "patchgroup-scan-default" {
+  count = length(baseline_list)
+  baseline_id = baseline_list[count.index]
   patch_group = "SCAN"
 }
+
+
 # resource "aws_ssm_patch_group" "patchgroup-scan-default-suse" {
 #     count =  var.default_scan ? 1 : 0
 #     baseline_id = data.aws_ssm_patch_baseline.suse.id
