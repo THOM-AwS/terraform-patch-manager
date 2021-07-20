@@ -6,14 +6,14 @@ variable "enabled" {
 
 variable "maintenance_windows" {
   description = "To set to be dynamic creation of patch groups by count and name."
-  type = list(string)
-  default = [ "AZ-A", "AZ-B", "AZ-C" ]
+  type        = list(string)
+  default     = ["AZ-A", "AZ-B", "AZ-C"]
 }
 
 variable "default_patch_groups" {
   description = "this allows you to use the aws default patch groups without creating new ones if you dont need to customise settings of a group. Set to false to create your own list of baselines"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 variable "default_scan" {
@@ -31,7 +31,7 @@ variable "schedule_windows" {
 variable "schedule_windows_scan" {
   description = "when will scanner window be run on cron expression"
   type        = string
-  default     = "cron(0 16 ? * SUN *)"  // Daily at 2am AEST
+  default     = "cron(0 16 ? * SUN *)" // Daily at 2am AEST
 }
 
 variable "install_maintenance_windows_targets" {
@@ -99,11 +99,11 @@ variable "rejected_patches" {
   default     = []
 }
 
-variable "default_baselines" {
-  description = "list of baselines for index to propagate"
-  type        = list
-  default     = [data.aws_ssm_patch_baseline.windows.id]//, data.aws_ssm_patch_baseline.suse.id, data.aws_ssm_patch_baseline.ubuntu.id, data.aws_ssm_patch_baseline.debian.id, data.aws_ssm_patch_baseline.rhel.id, data.aws_ssm_patch_baseline.amazon.id, data.aws_ssm_patch_baseline.amazon2.id, data.aws_ssm_patch_baseline.centos.id, data.aws_ssm_patch_baseline.oracle.id ]
-}
+# variable "default_baselines" {
+#   description = "list of baselines for index to propagate"
+#   type        = list
+#   default     = [data.aws_ssm_patch_baseline.windows.id]//, data.aws_ssm_patch_baseline.suse.id, data.aws_ssm_patch_baseline.ubuntu.id, data.aws_ssm_patch_baseline.debian.id, data.aws_ssm_patch_baseline.rhel.id, data.aws_ssm_patch_baseline.amazon.id, data.aws_ssm_patch_baseline.amazon2.id, data.aws_ssm_patch_baseline.centos.id, data.aws_ssm_patch_baseline.oracle.id ]
+# }
 variable "custom_baselines" {
   description = "create a list of custom baselines you want to use instead of the default ones."
   type        = list(string)

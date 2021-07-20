@@ -1,7 +1,7 @@
 
 resource "aws_iam_role" "ssm_maintenance" {
-  name = "${var.client_name}-role-ssm-patch-manager"
-  path = "/system/"
+  name               = "${var.client_name}-role-ssm-patch-manager"
+  path               = "/system/"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",

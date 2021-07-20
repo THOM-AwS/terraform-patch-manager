@@ -2,7 +2,7 @@
 resource "aws_ssm_maintenance_window" "window-scan" {
   count    = var.default_scan ? 1 : 0
   name     = "CMD-Maintenance-Window-Scan-Only"
-  schedule =  var.schedule_windows_scan
+  schedule = var.schedule_windows_scan
   duration = 3
   cutoff   = 1
 }
@@ -10,7 +10,7 @@ resource "aws_ssm_maintenance_window" "window-scan" {
 resource "aws_ssm_maintenance_window" "window" {
   count    = length(var.maintenance_windows)
   name     = "${var.client_name}-Maintenance-Window-Scan-${var.maintenance_windows[count.index]}"
-  schedule =  var.schedule_windows[count.index]
+  schedule = var.schedule_windows[count.index]
   duration = 3
   cutoff   = 1
 }
@@ -49,7 +49,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
 
 resource "aws_ssm_maintenance_window_target" "target_install_scan" {
   count         = var.default_scan ? 1 : 0
-  name             = "SCAN"
+  name          = "SCAN"
   window_id     = aws_ssm_maintenance_window.window-scan[0].id
   resource_type = "INSTANCE"
 
