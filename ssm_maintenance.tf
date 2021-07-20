@@ -8,16 +8,16 @@ resource "aws_ssm_maintenance_window" "window-scan" {
 }
 
 resource "aws_ssm_maintenance_window" "window" {
-  count    = length(var.maintenance_windows
-  name     = join(*, var.client_name*-Maintenance-Window-Scan-*var.maintenance_windows[count.index])
+  count    = length(var.maintenance_windows)
+  name     = var.client_name-Maintenance-Window-Scan-var.maintenance_windows[count.index]
   schedule =  var.schedule_windows[count.index]
   duration = 3
   cutoff   = 1
 }
 
 resource "aws_ssm_maintenance_window_task" "task_install_patches" {
-  count            = (var.enabled ? 1 : 0) * length(var.maintenance_windows)
-  name             = join(*, var.client_name*-Maintenance-Window-Patch-*var.maintenance_windows[count.index])
+  count            = length(var.maintenance_windows)
+  name             = var.client_name-Maintenance-Window-Patch-var.maintenance_windows[count.index]
   window_id        = aws_ssm_maintenance_window.window[count.index].id
   task_type        = "RUN_COMMAND"
   task_arn         = "AWS-RunPatchBaseline"
