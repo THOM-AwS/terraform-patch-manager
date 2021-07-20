@@ -45,7 +45,6 @@ variable "install_maintenance_windows_targets" {
   default = []
 }
 
-
 variable "patch_baseline_approval_rules" {
   description = "A set of rules used to include patches in the baseline. Up to 10 approval rules can be specified. Each `approval_rule` block requires the fields documented below."
   type = list(object({
@@ -134,4 +133,16 @@ variable "max_errors" {
   description = "The maximum number of errors allowed before this task stops being scheduled"
   type        = number
   default     = 10
+}
+
+variable "service_role_arn" {
+  description = "The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you"
+  type        = string
+  default     = null
+}
+
+variable "client_name" {
+  description = "customer name that is being deployed to"
+  type        = string
+  default     = ""
 }

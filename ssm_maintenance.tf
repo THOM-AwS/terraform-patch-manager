@@ -8,7 +8,7 @@ resource "aws_ssm_maintenance_window" "window-scan" {
 }
 
 resource "aws_ssm_maintenance_window" "window" {
-  count    = (var.enabled ? 1 : 0) * length(var.maintenance_windows)
+  count    = length(var.maintenance_windows
   name     = "CMD-Maintenance-Window-${var.maintenance_windows[count.index]}"
   schedule =  var.schedule_windows[count.index]
   duration = 3
@@ -21,6 +21,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
   window_id        = aws_ssm_maintenance_window.window[count.index].id
   task_type        = "RUN_COMMAND"
   task_arn         = "AWS-RunPatchBaseline"
+  service_role_arn = var.service_role_arn
   priority         = var.task_install_priority
   max_concurrency  = var.max_concurrency
   max_errors       = var.max_errors
