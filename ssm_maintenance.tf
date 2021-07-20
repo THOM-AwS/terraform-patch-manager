@@ -1,7 +1,7 @@
 
 resource "aws_ssm_maintenance_window" "window-scan" {
   count    = var.default_scan ? 1 : 0
-  name     = "CMD-Maintenance-Window-Scan-Only"
+  name     = "${var.client_name}-Maintenance-Window-Scan-Only"
   schedule = var.schedule_windows_scan
   duration = 3
   cutoff   = 1
@@ -15,6 +15,7 @@ resource "aws_ssm_maintenance_window" "window" {
   cutoff   = 1
 }
 
+########## TASK ##########
 resource "aws_ssm_maintenance_window_task" "task_install_patches" {
   count            = length(var.maintenance_windows)
   name             = "${var.client_name}-Maintenance-Window-Patch-${var.maintenance_windows[count.index]}"
@@ -45,6 +46,35 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
   }
 }
 
+resource "aws_ssm_maintenance_window_task" "task_scan" {
+  name             = "${var.client_name}-Maintenance-Window-Patch-Scan}"
+  window_id        = aws_ssm_maintenance_window.window-scan.id
+  task_type        = "RUN_COMMAND"
+  task_arn         = "AWS-RunPatchBaseline"
+  service_role_arn = var.service_role_arn
+  priority         = var.task_install_priority
+  max_concurrency  = var.max_concurrency
+  max_errors       = var.max_errors
+
+  targets {
+    key    = "WindowTargetIds"
+    values = aws_ssm_maintenance_window_target.target_install.*.id
+  }
+
+  task_invocation_parameters {
+    run_command_parameters {
+      parameter {
+        name   = "Operation"
+        values = ["Scan"]
+      }
+      parameter {
+        name   = "RebootOption"
+        values = [NoReboot]
+      }
+    }
+  }
+}
+
 ######## Group SCAN ##########
 
 resource "aws_ssm_maintenance_window_target" "target_install_scan" {
@@ -70,7 +100,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
   }
 }
 
-######## Group ##########
+######## Group Install ##########
 resource "aws_ssm_maintenance_window_target" "target_install" {
   count         = length(var.maintenance_windows)
   name          = var.maintenance_windows[count.index]
