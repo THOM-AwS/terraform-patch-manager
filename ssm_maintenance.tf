@@ -5,9 +5,6 @@ resource "aws_ssm_maintenance_window" "window-scan" {
   schedule =  var.schedule_windows_scan
   duration = 3
   cutoff   = 1
-  tags     = {
-    Managed_by = "Terraform"
-  }
 }
 
 resource "aws_ssm_maintenance_window" "window" {
@@ -16,9 +13,6 @@ resource "aws_ssm_maintenance_window" "window" {
   schedule =  var.schedule_windows[count.index]
   duration = 3
   cutoff   = 1
-  tags     = {
-    Managed_by = "Terraform"
-  }
 }
 
 resource "aws_ssm_maintenance_window_task" "task_install_patches" {
@@ -30,9 +24,6 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
   priority         = var.task_install_priority
   max_concurrency  = var.max_concurrency
   max_errors       = var.max_errors
-  tags     = {
-    Managed_by = "Terraform"
-  }
 
   targets {
     key    = "WindowTargetIds"
@@ -60,9 +51,6 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
   name             = "SCAN"
   window_id     = aws_ssm_maintenance_window.window-scan[0].id
   resource_type = "INSTANCE"
-  tags     = {
-    Managed_by = "Terraform"
-  }
 
   dynamic "targets" {
     for_each = toset(var.install_maintenance_windows_targets)
@@ -87,9 +75,6 @@ resource "aws_ssm_maintenance_window_target" "target_install_a" {
   name          = "AZ-A"
   window_id     = aws_ssm_maintenance_window.window[count.index].id
   resource_type = "INSTANCE"
-  tags     = {
-    Managed_by = "Terraform"
-  }
 
   dynamic "targets" {
     for_each = toset(var.install_maintenance_windows_targets)
@@ -116,9 +101,6 @@ resource "aws_ssm_maintenance_window_target" "target_install_b" {
   name             = "AZ-B"
   window_id     = aws_ssm_maintenance_window.window[1].id
   resource_type = "INSTANCE"
-  tags     = {
-    Managed_by = "Terraform"
-  }
 
   dynamic "targets" {
     for_each = toset(var.install_maintenance_windows_targets)
@@ -144,9 +126,6 @@ resource "aws_ssm_maintenance_window_target" "target_install_c" {
   name             = "AZ-C"
   window_id     = aws_ssm_maintenance_window.window[2].id
   resource_type = "INSTANCE"
-  tags     = {
-    Managed_by = "Terraform"
-  }
 
   dynamic "targets" {
     for_each = toset(var.install_maintenance_windows_targets)
