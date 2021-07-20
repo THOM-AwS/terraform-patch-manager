@@ -1,7 +1,7 @@
 
 ########## SCAN ##########
 resource "aws_ssm_patch_group" "patchgroup-scan-default" {
-  count = length(var.default_baselines)
+  count = 0//length(var.default_baselines)
   baseline_id = element([
     data.aws_ssm_patch_baseline.windows.id,
     data.aws_ssm_patch_baseline.suse.id,
