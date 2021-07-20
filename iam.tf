@@ -20,5 +20,5 @@ EOF
 }
 resource "aws_iam_role_policy_attachment" "role_attach_ssm_mw" {
   role       = aws_iam_role.ssm_maintenance.name
-  policy_arn = data.aws_iam_role.ssm_maintenance.arn
+  policy_arn = aws_iam_role.ssm_maintenance.arn
 }
