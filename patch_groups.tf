@@ -1,7 +1,7 @@
 ########## SCAN ##########
 resource "aws_ssm_patch_group" "patchgroup-scan-default-windows" {
     count =  9
-    baseline_id = data.aws_ssm_patch_baseline[count.index].*.id
+    baseline_id = var.default_baselines[count.index]
     patch_group = "SCAN"
 }
 # resource "aws_ssm_patch_group" "patchgroup-scan-default-suse" {
