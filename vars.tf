@@ -102,7 +102,7 @@ variable "rejected_patches" {
 variable "default_baselines" {
   description = "list of baselines for index to propagate"
   type        = list
-  default     = ["data.aws_ssm_patch_baseline.windows.id", "data.aws_ssm_patch_baseline.suse.id", "data.aws_ssm_patch_baseline.ubuntu.id", "data.aws_ssm_patch_baseline.debian.id", "data.aws_ssm_patch_baseline.rhel.id", "data.aws_ssm_patch_baseline.amazon.id", "data.aws_ssm_patch_baseline.amazon2.id", "data.aws_ssm_patch_baseline.centos.id", "data.aws_ssm_patch_baseline.oracle.id" ]
+  default     = [data.aws_ssm_patch_baseline.windows.id, data.aws_ssm_patch_baseline.suse.id, data.aws_ssm_patch_baseline.ubuntu.id, data.aws_ssm_patch_baseline.debian.id, data.aws_ssm_patch_baseline.rhel.id, data.aws_ssm_patch_baseline.amazon.id, data.aws_ssm_patch_baseline.amazon2.id, data.aws_ssm_patch_baseline.centos.id, data.aws_ssm_patch_baseline.oracle.id ]
 }
 variable "custom_baselines" {
   description = "create a list of custom baselines you want to use instead of the default ones."
