@@ -58,7 +58,7 @@ resource "aws_ssm_maintenance_window_task" "task_scan" {
 
   targets {
     key    = "WindowTargetIds"
-    values = aws_ssm_maintenance_window_target.target_install.*.id
+    values = aws_ssm_maintenance_window_target.target_install_scan.*.id
   }
 
   task_invocation_parameters {
