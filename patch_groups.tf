@@ -1,8 +1,8 @@
 
 ########## SCAN ##########
 resource "aws_ssm_patch_group" "patchgroup-scan-default" {
-  count = length(local.baseline_list)
-  baseline_id = local.baseline_list[count.index]
+  count = length(var.default_baselines)
+  baseline_id = var.default_baselines[count.index]
   patch_group = "SCAN"
 }
 
