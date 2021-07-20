@@ -35,7 +35,7 @@ resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
 }
 
 ############## AZ-B ##############
-resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
+resource "aws_ssm_patch_group" "patchgroup-install-default-b" {
   count = 8
   baseline_id =  element ([
     data.aws_ssm_patch_baseline.windows.id,
@@ -52,7 +52,7 @@ resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
 }
 
 ############## AZ-C ##############
-resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
+resource "aws_ssm_patch_group" "patchgroup-install-default-c" {
   count = 8
   baseline_id =  element ([
     data.aws_ssm_patch_baseline.windows.id,
