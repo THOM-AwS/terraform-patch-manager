@@ -89,7 +89,7 @@ resource "aws_ssm_maintenance_window_target" "target_install" {
     for_each = length(var.install_maintenance_windows_targets) == 0 ? [1] : []
     content {
       key    = "tag:Patch Group"
-      values = var.maintenance_windows[count.index]
+      values = [var.maintenance_windows[count.index]]
     }
   }
 }
