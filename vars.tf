@@ -112,7 +112,7 @@ variable "default_baselines" {
     data.aws_ssm_patch_baseline.amazon2.id,
     data.aws_ssm_patch_baseline.centos.id,
     data.aws_ssm_patch_baseline.oracle.id
-  ]list[index])
+  ]count.index)
 }
 
 variable "custom_baselines" {
