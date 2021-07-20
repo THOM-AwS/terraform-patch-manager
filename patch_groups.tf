@@ -1,49 +1,49 @@
 ########## SCAN ##########
 resource "aws_ssm_patch_group" "patchgroup-scan-default-windows" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.windows.id
+    count =  9
+    baseline_id = data.aws_ssm_patch_baseline.*.id
     patch_group = "SCAN"
 }
-resource "aws_ssm_patch_group" "patchgroup-scan-default-suse" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.suse.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-ubuntu" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.ubuntu.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-debian" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.debian.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-rhel" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.rhel.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-amazon" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.amazon.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-amazon2" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.amazon2.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-centos" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.centos.id
-    patch_group = "SCAN"
-}
-resource "aws_ssm_patch_group" "patchgroup-scan-default-oracle" {
-    count =  var.default_scan ? 1 : 0
-    baseline_id = data.aws_ssm_patch_baseline.oracle.id
-    patch_group = "SCAN"
-}
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-suse" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.suse.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-ubuntu" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.ubuntu.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-debian" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.debian.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-rhel" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.rhel.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-amazon" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.amazon.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-amazon2" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.amazon2.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-centos" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.centos.id
+#     patch_group = "SCAN"
+# }
+# resource "aws_ssm_patch_group" "patchgroup-scan-default-oracle" {
+#     count =  var.default_scan ? 1 : 0
+#     baseline_id = data.aws_ssm_patch_baseline.oracle.id
+#     patch_group = "SCAN"
+# }
 # resource "aws_ssm_patch_group" "patchgroup-scan-default-macos" {
 #     count =  var.default_scan ? 1 : 0
 #     baseline_id = data.aws_ssm_patch_baseline.macos.id
