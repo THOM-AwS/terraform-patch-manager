@@ -28,7 +28,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
 
   targets {
     key    = "WindowTargetIds"
-    values = aws_ssm_maintenance_window_target.target_install_a.*.id
+    values = aws_ssm_maintenance_window_target.target_install.*.id
   }
 
   task_invocation_parameters {
