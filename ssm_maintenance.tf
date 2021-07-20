@@ -47,7 +47,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
 }
 
 resource "aws_ssm_maintenance_window_task" "task_scan" {
-  name             = "${var.client_name}-Maintenance-Window-Patch-Scan}"
+  name             = "${var.client_name}-Maintenance-Window-Patch-Scan"
   window_id        = aws_ssm_maintenance_window.window-scan[0].id
   task_type        = "RUN_COMMAND"
   task_arn         = "AWS-RunPatchBaseline"
