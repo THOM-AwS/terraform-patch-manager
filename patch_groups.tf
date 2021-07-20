@@ -6,7 +6,6 @@ resource "aws_ssm_patch_group" "patchgroup-scan-default" {
   patch_group = "SCAN"
 }
 
-
 ########## AZ-A ##############
 resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
   count = 9
