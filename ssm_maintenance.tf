@@ -22,7 +22,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
   window_id        = aws_ssm_maintenance_window.window[count.index].id
   task_type        = "RUN_COMMAND"
   task_arn         = "AWS-RunPatchBaseline"
-  service_role_arn = var.service_role_arn
+  service_role_arn = aws_iam_role.ssm_maintenance.arn
   priority         = var.task_install_priority
   max_concurrency  = var.max_concurrency
   max_errors       = var.max_errors

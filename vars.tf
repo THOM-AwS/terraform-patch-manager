@@ -146,11 +146,11 @@ variable "max_errors" { // errors while patching before fail
   default     = 10
 }
 
-variable "service_role_arn" { // service role arn
-  description = "The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you"
-  type        = string
-  default     = aws_iam_role.ssm_maintenance.arn
-}
+# variable "service_role_arn" { // service role arn
+#   description = "The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you"
+#   type        = string
+#   default     = "${var.client_name}-role-ssm-patch-manager"
+# }
 
 variable "client_name" { // customer name for naming convention.
   description = "customer name that is being deployed to. This is required."
