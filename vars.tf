@@ -129,7 +129,7 @@ variable "operating_system" { // needed to create new aws_ssm_patch_baseline and
 
 variable "reboot_option" { // Will the instance reboot for patching
   description = "When you choose the RebootIfNeeded option, the instance is rebooted if Patch Manager installed new patches, or if it detected any patches with a status of INSTALLED_PENDING_REBOOT during the Install operation. Possible values : RebootIfNeeded, NoReboot"
-  type        = string[]
+  type        = list(string)
   default     = ["RebootIfNeeded"]
 }
 
