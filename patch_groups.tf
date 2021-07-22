@@ -1,7 +1,7 @@
 
 ########## SCAN ##########
 resource "aws_ssm_patch_group" "patchgroup-scan-default" {
-  count = 9
+  count = length(aws_ssm_patch_group.patchgroup-scan-default.baseline_id.count)
   baseline_id = element([
     data.aws_ssm_patch_baseline.windows.id,
     data.aws_ssm_patch_baseline.suse.id,
@@ -18,7 +18,7 @@ resource "aws_ssm_patch_group" "patchgroup-scan-default" {
 
 ########## AZ-A ##############
 resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
-  count = 9
+  count = length(aws_ssm_patch_group.patchgroup-install-default-a.baseline_id.count)
   baseline_id = element([
     data.aws_ssm_patch_baseline.windows.id,
     data.aws_ssm_patch_baseline.suse.id,
@@ -35,7 +35,7 @@ resource "aws_ssm_patch_group" "patchgroup-install-default-a" {
 
 ############## AZ-B ##############
 resource "aws_ssm_patch_group" "patchgroup-install-default-b" {
-  count = 9
+  count = length(aws_ssm_patch_group.patchgroup-install-default-b.baseline_id.count)
   baseline_id = element([
     data.aws_ssm_patch_baseline.windows.id,
     data.aws_ssm_patch_baseline.suse.id,
@@ -52,7 +52,7 @@ resource "aws_ssm_patch_group" "patchgroup-install-default-b" {
 
 ############## AZ-C ##############
 resource "aws_ssm_patch_group" "patchgroup-install-default-c" {
-  count = 9
+  count = length(aws_ssm_patch_group.patchgroup-install-default-c.baseline_id.count)
   baseline_id = element([
     data.aws_ssm_patch_baseline.windows.id,
     data.aws_ssm_patch_baseline.suse.id,
