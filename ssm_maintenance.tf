@@ -8,7 +8,7 @@ resource "aws_ssm_maintenance_window" "window-scan" {
 }
 
 resource "aws_ssm_maintenance_window" "window" {
-  count    = length(var.maintenance_windows)
+  count    = (var.default_patch_groups ? 1 : 0) * length(var.maintenance_windows)
   name     = "${var.client_name}-Maintenance-Window-Patch-${var.maintenance_windows[count.index]}"
   schedule = var.schedule_windows[count.index]
   duration = 3
@@ -17,7 +17,7 @@ resource "aws_ssm_maintenance_window" "window" {
 
 ########## TASK ##########
 resource "aws_ssm_maintenance_window_task" "task_install_patches" {
-  count            = length(var.maintenance_windows)
+  count            = (var.default_patch_groups ? 1 : 0) * length(var.maintenance_windows)
   name             = "${var.client_name}-Maintenance-Window-Patch-${var.maintenance_windows[count.index]}"
   window_id        = aws_ssm_maintenance_window.window[count.index].id
   task_type        = "RUN_COMMAND"
@@ -103,7 +103,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
 
 ######## Group Install ##########
 resource "aws_ssm_maintenance_window_target" "target_install" {
-  count         = length(var.maintenance_windows)
+  count         = (var.default_patch_groups ? 1 : 0) * length(var.maintenance_windows)
   name          = var.maintenance_windows[count.index]
   window_id     = aws_ssm_maintenance_window.window[count.index].id
   resource_type = "INSTANCE"
