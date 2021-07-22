@@ -1,8 +1,3 @@
-variable "enabled" {
-  description = "is the module enabled and will it create resources?"
-  type        = bool
-  default     = true
-}
 
 variable "maintenance_windows" {
   description = "To set to be dynamic creation of patch groups by count and name."
@@ -154,7 +149,7 @@ variable "max_errors" { // errors while patching before fail
 variable "service_role_arn" { // service role arn
   description = "The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you"
   type        = string
-  default     = null
+  default     = aws_iam_role.ssm_maintenance.arn
 }
 
 variable "client_name" { // customer name for naming convention.
