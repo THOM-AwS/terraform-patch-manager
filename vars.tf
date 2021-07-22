@@ -94,22 +94,6 @@ variable "rejected_patches" {
   default     = []
 }
 
-# variable "default_baselines" {
-#   description = "list of baselines for index to propagate"
-#   type        = list(any)
-#   default     = element([
-#     data.aws_ssm_patch_baseline.windows.id,
-#     data.aws_ssm_patch_baseline.suse.id,
-#     data.aws_ssm_patch_baseline.ubuntu.id,
-#     data.aws_ssm_patch_baseline.debian.id,
-#     data.aws_ssm_patch_baseline.rhel.id,
-#     data.aws_ssm_patch_baseline.amazon.id,
-#     data.aws_ssm_patch_baseline.amazon2.id,
-#     data.aws_ssm_patch_baseline.centos.id,
-#     data.aws_ssm_patch_baseline.oracle.id
-#   ]count.index)
-# }
-
 variable "custom_baselines" { // needed to create a new aws_ssm_patch_baseline
   description = "create a list of custom baselines you want to use instead of the default ones."
   type        = list(string)
@@ -145,12 +129,6 @@ variable "max_errors" { // errors while patching before fail
   type        = number
   default     = 10
 }
-
-# variable "service_role_arn" { // service role arn
-#   description = "The role that should be assumed when executing the task. If a role is not provided, Systems Manager uses your account's service-linked role. If no service-linked role for Systems Manager exists in your account, it is created for you"
-#   type        = string
-#   default     = "${var.client_name}-role-ssm-patch-manager"
-# }
 
 variable "client_name" { // customer name for naming convention.
   description = "customer name that is being deployed to. This is required."
