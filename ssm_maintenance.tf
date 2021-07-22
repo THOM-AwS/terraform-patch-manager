@@ -47,6 +47,7 @@ resource "aws_ssm_maintenance_window_task" "task_install_patches" {
 }
 
 resource "aws_ssm_maintenance_window_task" "task_scan" {
+  count            = var.default_scan ? 1 : 0
   name             = "${var.client_name}-Maintenance-Window-Patch-Scan"
   window_id        = aws_ssm_maintenance_window.window-scan[0].id
   task_type        = "RUN_COMMAND"
