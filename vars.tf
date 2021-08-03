@@ -94,17 +94,17 @@ variable "rejected_patches" {
   default     = []
 }
 
-# variable "custom_baselines" { // needed to create a new aws_ssm_patch_baseline
-#   description = "create a list of custom baselines you want to use instead of the default ones."
-#   type        = list(string)
-#   default     = []
-# }
+variable "custom_baselines" { // needed to create a new aws_ssm_patch_baseline
+  description = "create a list of custom baselines you want to use instead of the default ones."
+  type        = list(string)
+  default     = []
+}
 
-# variable "operating_system" { // needed to create new aws_ssm_patch_baseline and choose OS
-#   description = "which OS do you want to create a patch baseline for"
-#   type        = list(string)
-#   default     = ["WINDOWS"]
-# }
+variable "operating_system" { // needed to create new aws_ssm_patch_baseline and choose OS
+  description = "which OS do you want to create a patch baseline for"
+  type        = list(string)
+  default     = ["WINDOWS"]
+}
 
 variable "reboot_option" { // Will the instance reboot for patching
   description = "When you choose the RebootIfNeeded option, the instance is rebooted if Patch Manager installed new patches, or if it detected any patches with a status of INSTALLED_PENDING_REBOOT during the Install operation. Possible values : RebootIfNeeded, NoReboot"
@@ -112,11 +112,11 @@ variable "reboot_option" { // Will the instance reboot for patching
   default     = "RebootIfNeeded"
 }
 
-# variable "task_install_priority" { // priority for custom aws_ssm_patch_baseline
-#   description = "The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel."
-#   type        = number
-#   default     = 1
-# }
+variable "task_install_priority" { // priority for custom aws_ssm_patch_baseline
+  description = "The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel."
+  type        = number
+  default     = 1
+}
 
 variable "max_concurrency" { // concurrency for patching window
   description = "The maximum number of targets this task can be run for in parallel"
