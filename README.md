@@ -90,7 +90,7 @@ TBD
 
 
 ## example main.tf
-`
+```
 module "patch-manager" {
   source                              = "github.com/THOM-AwS/terraform-patch-manager"
   client_name                         = local.workspace["aws_profile"]
@@ -108,10 +108,10 @@ module "patch-manager" {
   task_install_priority               = local.workspace["task_install_priority"]
   max_concurrency                     = local.workspace["max_concurrency"]
   max_errors                          = local.workspace["max_errors"]
-}`
+}``
 
 ## example locals.tf
-`
+```
 locals {
   env = {
     sandpit = {
@@ -137,4 +137,4 @@ locals {
   }
   workspace = local.env[terraform.workspace]
 }
-`
+```
