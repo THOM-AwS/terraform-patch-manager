@@ -96,7 +96,7 @@ resource "aws_ssm_maintenance_window_target" "target_install_scan" {
     for_each = length(var.install_maintenance_windows_targets) == 0 ? [1] : []
     content {
       key    = "tag:Patch Group"
-      values = ["SCAN"] //var.install_patch_groups
+      values = ["SCAN"]
     }
   }
 }

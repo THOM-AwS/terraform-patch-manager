@@ -26,7 +26,7 @@ variable "schedule_windows" {
 variable "schedule_windows_scan" {
   description = "when will scanner window be run on cron expression"
   type        = string
-  default     = "cron(0 16 ? * SUN *)" // Daily at 2am AEST
+  default     = "cron(0 16 ? * SUN *)" // Sunday at 2am AEST
 }
 
 variable "install_maintenance_windows_targets" {
@@ -40,41 +40,41 @@ variable "install_maintenance_windows_targets" {
   default = []
 }
 
-variable "patch_baseline_approval_rules" {
-  description = "A set of rules used to include patches in the baseline. Up to 10 approval rules can be specified. Each `approval_rule` block requires the fields documented below."
-  type = list(object({
-    approve_after_days : number
-    compliance_level : string
-    enable_non_security : bool
-    patch_baseline_filters : list(object({
-      name : string
-      values : list(string)
-    }))
-  }))
+# variable "patch_baseline_approval_rules" {
+#   description = "A set of rules used to include patches in the baseline. Up to 10 approval rules can be specified. Each `approval_rule` block requires the fields documented below."
+#   type = list(object({
+#     approve_after_days : number
+#     compliance_level : string
+#     enable_non_security : bool
+#     patch_baseline_filters : list(object({
+#       name : string
+#       values : list(string)
+#     }))
+#   }))
 
-  default = [
-    {
-      approve_after_days  = 7
-      compliance_level    = "HIGH"
-      enable_non_security = true
-      patch_baseline_filters = [
-        {
-          name   = "PRODUCT"
-          values = ["AmazonLinux2", "AmazonLinux2.0"]
-        },
-        {
-          name   = "CLASSIFICATION"
-          values = ["Security", "Bugfix", "Recommended"]
-        },
-        {
-          name   = "SEVERITY"
-          values = ["Critical", "Important", "Medium"]
-        }
-      ]
-    }
-  ]
+#   default = [
+#     {
+#       approve_after_days  = 7
+#       compliance_level    = "HIGH"
+#       enable_non_security = true
+#       patch_baseline_filters = [
+#         {
+#           name   = "PRODUCT"
+#           values = ["AmazonLinux2", "AmazonLinux2.0"]
+#         },
+#         {
+#           name   = "CLASSIFICATION"
+#           values = ["Security", "Bugfix", "Recommended"]
+#         },
+#         {
+#           name   = "SEVERITY"
+#           values = ["Critical", "Important", "Medium"]
+#         }
+#       ]
+#     }
+#   ]
 
-}
+# }
 
 variable "approved_patches_compliance_level" {
   description = "The list of systems for the SSM baseline"
@@ -94,17 +94,17 @@ variable "rejected_patches" {
   default     = []
 }
 
-variable "custom_baselines" { // needed to create a new aws_ssm_patch_baseline
-  description = "create a list of custom baselines you want to use instead of the default ones."
-  type        = list(string)
-  default     = []
-}
+# variable "custom_baselines" { // needed to create a new aws_ssm_patch_baseline
+#   description = "create a list of custom baselines you want to use instead of the default ones."
+#   type        = list(string)
+#   default     = []
+# }
 
-variable "operating_system" { // needed to create new aws_ssm_patch_baseline and choose OS
-  description = "which OS do you want to create a patch baseline for"
-  type        = list(string)
-  default     = ["WINDOWS"]
-}
+# variable "operating_system" { // needed to create new aws_ssm_patch_baseline and choose OS
+#   description = "which OS do you want to create a patch baseline for"
+#   type        = list(string)
+#   default     = ["WINDOWS"]
+# }
 
 variable "reboot_option" { // Will the instance reboot for patching
   description = "When you choose the RebootIfNeeded option, the instance is rebooted if Patch Manager installed new patches, or if it detected any patches with a status of INSTALLED_PENDING_REBOOT during the Install operation. Possible values : RebootIfNeeded, NoReboot"
@@ -112,11 +112,11 @@ variable "reboot_option" { // Will the instance reboot for patching
   default     = "RebootIfNeeded"
 }
 
-variable "task_install_priority" { // priority for custom aws_ssm_patch_baseline
-  description = "The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel."
-  type        = number
-  default     = 1
-}
+# variable "task_install_priority" { // priority for custom aws_ssm_patch_baseline
+#   description = "The priority of the task in the Maintenance Window, the lower the number the higher the priority. Tasks in a Maintenance Window are scheduled in priority order with tasks that have the same priority scheduled in parallel."
+#   type        = number
+#   default     = 1
+# }
 
 variable "max_concurrency" { // concurrency for patching window
   description = "The maximum number of targets this task can be run for in parallel"
