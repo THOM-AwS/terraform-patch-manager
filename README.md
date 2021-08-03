@@ -97,8 +97,6 @@ module "patch-manager" {
   default_patch_groups                = local.workspace["default_patch_groups"]
   default_scan                        = local.workspace["default_scan"]
   schedule_windows_scan               = local.workspace["schedule_windows_scan"]
-  # install_maintenance_windows_targets = local.workspace["install_maintenance_windows_targets"]
-  # patch_baseline_approval_rules       = local.workspace["patch_baseline_approval_rules"]
   approved_patches_compliance_level   = local.workspace["approved_patches_compliance_level"]
   approved_patches                    = local.workspace["approved_patches"]
   rejected_patches                    = local.workspace["rejected_patches"]
@@ -124,29 +122,6 @@ locals {
       ## only matters when not using default baselines:
       schedule_windows      = ["cron(0 18 ? * TUE *)", "cron(0 18 ? * WED *)", "cron(0 18 ? * THU *)"] // 4am AEST
       schedule_windows_scan = "cron(0 16 ? * SUN *)"                                                   // Daily at 2am AEST
-      # install_maintenance_windows_targets = [
-      #   "INSTANCE" = {
-      #     "Patch Group" = "AZ-A",
-      #     ]
-      # patch_baseline_approval_rules = {
-      #   approve_after_days  = 7
-      #   compliance_level    = "HIGH"
-      #   enable_non_security = true
-      #   patch_baseline_filters = [
-      #     {
-      #       name   = "PRODUCT"
-      #       values = ["AmazonLinux2", "AmazonLinux2.0"]
-      #     },
-      #     {
-      #       name   = "CLASSIFICATION"
-      #       values = ["Security", "Bugfix", "Recommended"]
-      #     },
-      #     {
-      #       name   = "SEVERITY"
-      #       values = ["Critical", "Important", "Medium"]
-      #     }
-      #   ]
-      # }
       approved_patches_compliance_level = "CRITICAL"
       approved_patches                  = []
       rejected_patches                  = []
