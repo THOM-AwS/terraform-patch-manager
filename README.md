@@ -108,7 +108,8 @@ module "patch-manager" {
   task_install_priority               = local.workspace["task_install_priority"]
   max_concurrency                     = local.workspace["max_concurrency"]
   max_errors                          = local.workspace["max_errors"]
-}```
+}
+```
 
 ## example locals.tf
 ```
