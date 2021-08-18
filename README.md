@@ -1,5 +1,7 @@
 # Notes
 
+THIS IS A TERRAFORM MODULE AND NEEDS TO BE REFERENECED FROM A MODULE BLOCK IN A TF FILE. 
+
 Create patching groups for three teir architecture VPC's with both scan and patch for all OS types.
 
 This is a module in progress for deploying patch manager with maintenance windows across three days, over three AZ's. This will deploy perfect with no arguments. 
