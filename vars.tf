@@ -20,7 +20,7 @@ variable "default_scan" {
 variable "schedule_windows" {
   description = "when will each maintenance window be run on cron expression"
   type        = list(string)
-  default     = ["cron(0 18 ? * TUE *)", "cron(0 18 ? * WED *)", "cron(0 18 ? * THU *)"] // 4am AEST
+  default     = ["cron(0 18 ? * MON *)", "cron(0 18 ? * TUE *)", "cron(0 18 ? * WED *)"] // 4am AEST on tues, wed, and thurs
 }
 
 variable "schedule_windows_scan" {
